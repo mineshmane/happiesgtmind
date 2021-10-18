@@ -13,7 +13,6 @@ function App() {
     <div className="App">
 
       this is app js file
-      <Home />
      
 
       <Router>
@@ -23,13 +22,13 @@ function App() {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/">
+          <Route exact path="/">
             <Register />
           </Route>
         
-          {/* <Route path="/home">
+          <Route exact path="/home">
             <Home />
-          </Route> */}
+          </Route>
         </Switch>
       </div>
     </Router>
