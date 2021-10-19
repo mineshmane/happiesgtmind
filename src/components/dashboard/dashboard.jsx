@@ -1,6 +1,7 @@
 import React from 'react';
 import data from './data'
 import DateTimePicker from 'react-datetime-picker';
+import FormDialog from './dailog'
 
 // import { useEffect } from "react"
 // import TextField from '@mui/material/TextField';
@@ -15,7 +16,9 @@ export default class Home extends React.Component {
 
         this.state = {
             Employees: [],
-            value: ''
+            value: '',
+            openD: false,
+            empObj: null
         }
     }
 
@@ -24,8 +27,18 @@ export default class Home extends React.Component {
         this.setState({ Employees: data, value: new Date() })
     }
 
-    onChange=()=>{
+    onChange = () => {
 
+    }
+
+    CloseDailog = () => {
+        console.log(" close dalogbox ");
+        this.setState({ openD: !this.state.openD })
+
+    }
+    openDailog = (item) => {
+        console.log(" callling dailog ");
+        this.setState({ openD: !this.state.openD, empObj: item })
     }
 
     render() {
@@ -59,12 +72,14 @@ export default class Home extends React.Component {
                         </tr>
                         <tbody>
                             {this.state.Employees.map((item, i) => (
-                                <tr>
+                                <tr key={item.id}>
                                     <td>{item.name}</td>
                                     <td>{item.email}</td>
                                     <td>{item.sallary}</td>
                                     <td>{item.gender}</td>
-
+                                    <td>
+                                        <button onClick={() => this.openDailog(item)}>edit</button>
+                                    </td>
 
 
                                 </tr>
@@ -74,6 +89,8 @@ export default class Home extends React.Component {
                     </table>
 
                 </div>
+
+                <FormDialog openDailogB={this.state.openD} employee={this.state} CloseD={this.CloseDailog} ></FormDialog>
 
             </div>
 
